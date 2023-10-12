@@ -10,8 +10,8 @@ Uzdevuma ietvaros izveidots:
 # Projekta uzdevumi:
 ## _Infrastrukturas_ izveidošana
 Uzdevuma ietvaros izveidots:
-- [ ]AWS serveris:
-- [ ] key:  For-Test-From-Terraform
+- [ ]AWS servera instance: i-04c72b8e5e204eb10 (For-Test-From-Terraform)
+- [ ]AMI name ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230516
 - [ ] Izmantojot **https://app.diagrams.net/** aprakstīt infrastruktūru. Bildes izvietot projekta Wiki.
 - [ ] 
 
