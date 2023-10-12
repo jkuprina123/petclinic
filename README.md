@@ -28,7 +28,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 ## _Petclinic_ uzstādīšana
 Uzdevuma ietvaros izveidots:
-- [ ]
+- [ ] http://54.212.31.20:8080/
 - [ ] 
 
 ## _image_ kopešana
