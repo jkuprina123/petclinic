@@ -1,0 +1,29 @@
+name: "Development Build"
+on: push
+ 
+jobs:
+
+  
+  DeployDev:
+    name: Deploy to Dev
+    # if: github.event_name == 'pull_request'
+ 
+    runs-on: ubuntu-latest
+    environment:
+      name: Development
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Upload to S3
+        run: |
+          aws s3 mb s3://latest-test-our-fita
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-west-2'
+      
+     
+        
+  
+        
+    
