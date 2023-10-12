@@ -1,3 +1,18 @@
-#!/bin/sh
-#
-#
+#!/bin/bash
+#set -x
+###################################################
+# A simple Git Hook to validate the commit message
+# Validations
+# 1. There should be a commit message !
+####################################################
+
+shopt -s nocasematch                        # Case insensitive Cases 
+COMMIT_MSG_FILE=$1                          # Recieve the commit message .git/COMMIT_EDITMSG
+
+
+# Throw error if the message is empty
+if [[ -z $(grep '[^[:space:]]' $COMMIT_MSG_FILE) ]] ; then
+
+    echo "You can't just commit without a message !!" >&2
+    exit 1
+fi
