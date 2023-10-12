@@ -14,6 +14,9 @@ jobs:
       - uses: actions/checkout@master
       - name: Upload to S3
         run: |
+          aws s3 ls
+
+          
           #aws s3 mb s3://latest-test-our-fita
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
