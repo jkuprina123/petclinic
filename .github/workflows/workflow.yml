@@ -27,7 +27,7 @@ jobs:
                  
           HOST_NAME : ${DNS_ADDR}
          
-          USER_NAME : ${{USER_NAME  }}
+          USER_NAME : ${{USER_NAME}}
     
         
         run: |
