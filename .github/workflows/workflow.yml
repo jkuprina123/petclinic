@@ -3,11 +3,9 @@ on: push
  
 jobs:
 
-  
   DeployDev:
-    name: Deploy to Dev
-    # if: github.event_name == 'pull_request'
- 
+    name: Deploy
+   
     runs-on: ubuntu-latest
     environment:
       name: Development
