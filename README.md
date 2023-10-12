@@ -13,7 +13,7 @@ Uzdevuma ietvaros izveidots:
 - [ ] AWS servera instance: i-04c72b8e5e204eb10 (For-Test-From-Terraform)
 - [ ] AMI name ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230516
 - [ ] Izmantojot **https://app.diagrams.net/** aprakstīt infrastruktūru. Bildes izvietot projekta Wiki.
-- [ ] 
+- [ ] ![book!](https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg?w=2000)
 
 ## _Docker_ uzstādīšana
 Uzdevuma ietvaros izveidots:
@@ -28,7 +28,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 ## _Petclinic_ uzstādīšana
 Uzdevuma ietvaros izveidots:
-- [ ]
+- [ ] http://54.212.31.20:8080/
 - [ ] 
 
 ## _image_ kopešana
