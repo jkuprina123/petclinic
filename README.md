@@ -10,7 +10,8 @@ Uzdevuma ietvaros izveidots:
 # Projekta uzdevumi:
 ## _Infrastrukturas_ izveidošana
 Uzdevuma ietvaros izveidots:
-- [ ]
+- [ ]AWS serveris:
+- [ ] key:  For-Test-From-Terraform
 - [ ] Izmantojot **https://app.diagrams.net/** aprakstīt infrastruktūru. Bildes izvietot projekta Wiki.
 - [ ] 
 
