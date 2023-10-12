@@ -28,14 +28,14 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
-          HOST_NAME : ${vars.DNS_ADDR}
+          HOST_NAME : ${{ vars.DNS_ADDR }}
          
-          USER_NAME : ${vars.USER_NAME}
+          USER_NAME : ${{ vars.USER_NAME }}
     
         
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${vars.USER_NAME}@${vars.DNS_ADDR} "
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${DNS_ADDR} "
             sudo apt-get update&
             sudo apt-get install ca-certificates curl gnupg&
             sudo install -m 0755 -d /etc/apt/keyrings&
