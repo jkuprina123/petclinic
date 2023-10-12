@@ -17,8 +17,14 @@ Uzdevuma ietvaros izveidots:
 
 ## _Docker_ uzstādīšana
 Uzdevuma ietvaros izveidots:
-- [ ]
-- [ ] 
+- [ ] Installed using `apt`: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+- [ ] Outputs:
+```
+ubuntu@ip-172-31-64-72:~$ docker -v
+Docker version 24.0.6, build ed223bc
+ubuntu@ip-172-31-64-72:~$ sudo docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
 
 ## _Petclinic_ uzstādīšana
 Uzdevuma ietvaros izveidots:
