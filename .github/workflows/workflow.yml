@@ -1,5 +1,5 @@
 name: "Development Build"
-on: label
+on: push
  
 jobs:
 
