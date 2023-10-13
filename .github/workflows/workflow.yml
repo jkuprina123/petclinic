@@ -3,7 +3,7 @@ on: push
  
 jobs:
 
-  DeployDev:
+  S3:
     name: Deploy
    
     runs-on: ubuntu-latest
@@ -12,30 +12,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Upload to S3
+      - name: Create S3 (aws s3 mb s3://latest-test-our-fita)
         run: |
-          aws s3 ls
+          aws s3 ls s3://latest-test-our-fita
 
           
-          #aws s3 mb s3://latest-test-our-fita
+          
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-west-2'
       
-     
-      - name: Deploy in EC2
+  InstallDocker:     
+        name: Deploy in EC2 (Install Docker)
+        runs-on: ubuntu-latest
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
           HOST_NAME : ${{ vars.DNS_ADDR }}
-         
+          
           USER_NAME : ${{ vars.USER_NAME }}
     #54.212.31.20
         
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
+          run: |
+           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
             sudo apt-get update&
            sudo apt-get install ca-certificates curl gnupg&
            sudo install -m 0755 -d /etc/apt/keyrings&
@@ -44,6 +45,18 @@ jobs:
            sudo tee /etc/apt/sources.list.d/docker.list > /dev/null &
             sudo apt-get update&
             sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
-  
-        
+            
+  Test:
+        name: Test! Check the deployed service URL
+     
+        uses: jtalk/url-health-check-action@v3
+        with:
+      # Check the following URLs one by one sequentially
+         url: https://${HOST_NAME}|http://${HOST_NAME}
+      # Follow redirects, or just report success on 3xx status codes
+         follow-redirect: false # Optional, defaults to "false"
+      # Fail this action after this many failed attempts
+         max-attempts: 3 # Optional, defaults to 1
+      # Delay between retries
+         retry-delay: 5s # Optional, only applicable to max-attempts > 1 
     
