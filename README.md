@@ -28,8 +28,8 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 ## _Petclinic_ uzstādīšana
 Uzdevuma ietvaros izveidots:
+- [ ] Dockerfile
 - [ ] http://54.212.31.20:8080/
-- [ ] 
 
 ## _image_ kopešana
 Uzdevuma ietvaros izveidots:
@@ -45,4 +45,13 @@ Uzdevuma ietvaros izveidots:
 ## _Petclinic_ uzstādīšana izmantojot pipelines
 Uzdevuma ietvaros izveidots:
 - [ ]
-- [ ] 
+- [ ]
+
+
+## DONE
+### _Petclinic_ uzstādīšana
+#### Official
+![Official](https://raw.githubusercontent.com/jkuprina123/petclinic/main/images/petclinic_official.png)
+#### Custom
+![Custom](https://raw.githubusercontent.com/jkuprina123/petclinic/main/images/petclinic_custom.png)
+
