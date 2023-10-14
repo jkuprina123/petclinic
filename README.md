@@ -33,8 +33,7 @@ Uzdevuma ietvaros izveidots:
 
 ## _image_ kopešana
 Uzdevuma ietvaros izveidots:
-- [ ]
-- [ ] 
+- [ ] https://hub.docker.com/repository/docker/vasiliskovs/petclinic/general
 
 
 ## _image_ kopēšanā S3
@@ -55,3 +54,5 @@ Uzdevuma ietvaros izveidots:
 #### Custom
 ![Custom](https://raw.githubusercontent.com/jkuprina123/petclinic/main/images/petclinic_custom.png)
 
+### _image_ kopešana
+![Dockerhub](https://raw.githubusercontent.com/jkuprina123/petclinic/main/images/dockerhub.png)
