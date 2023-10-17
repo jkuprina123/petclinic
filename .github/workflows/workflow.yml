@@ -28,8 +28,8 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
-          HOST_NAME : ${{ vars.DNS_ADDR }}
-          
+        #  HOST_NAME : ${{ vars.DNS_ADDR }}
+          HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
           USER_NAME : ${{ vars.USER_NAME}}
         run: |
            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
