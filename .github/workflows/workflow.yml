@@ -46,7 +46,8 @@ jobs:
             sudo apt-get update&
             sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin&
             docker -v&
-            docker ps"
+            docker ps&
+            sudo docker run hello-world"
 
             
   Testssssss:  
@@ -57,7 +58,8 @@ jobs:
          
          - name: Check http status code of production site
            env :
-                HOST_NAME : ${{ vars.DNS_ADDR }}
+               #HOST_NAME : ${{ vars.DNS_ADDR }}
+               HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
            uses: lakuapik/gh-actions-http-status@v1
            with:
             sites: '["http://${HOST_NAME}", "https://${HOST_NAME}"]'
