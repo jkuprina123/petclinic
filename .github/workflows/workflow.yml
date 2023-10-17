@@ -51,7 +51,23 @@ jobs:
             docker -v&
             docker ps&
             sudo docker run hello-world"
-
+      - name: Deploy in EC2 (Install Docker)2
+        env:
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+                 
+        #  HOST_NAME : ${{ vars.DNS_ADDR }}
+        #  HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ec2-18-236-146-207.us-west-2.compute.amazonaws.com 
+          USER_NAME : ${{ vars.USER_NAME}}
+        run: |
+           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
+                
+            sudo apt-get update&
+            sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin&
+            docker -v&
+            docker ps&
+            sudo docker run hello-world"
             
   Testssssss:  
       
