@@ -60,8 +60,7 @@ jobs:
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
                 
             sudo apt-get update&
-            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin&
-            sudo usermod -aG docker $USER"
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"           
 
       - name: Deploy in EC2 (Install petclinic from hub)
         env:
