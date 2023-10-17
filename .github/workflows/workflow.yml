@@ -65,7 +65,7 @@ jobs:
             sudo docker ps&
             sudo docker pull vasiliskovs/petclinic:5.3.22&
             sudo docker run -d vasiliskovs/petclinic:5.3.22&
-            sudo docker ps""
+            sudo docker ps"
             
   Testssssss:  
       
