@@ -11,7 +11,7 @@ Uzdevuma ietvaros izveidots:
 ## _Infrastrukturas_ izveidošana
 Uzdevuma ietvaros izveidots:
 - [x] AWS servera instance: i-04c72b8e5e204eb10 (For-Test-From-Terraform)
-- [X] ![Done file](https://github.com/jkuprina123/petclinic/wiki/DONE)
+- [X] Done file: https://github.com/jkuprina123/petclinic/wiki/DONE
 
 ## _Docker_ uzstādīšana
 Uzdevuma ietvaros izveidots:
