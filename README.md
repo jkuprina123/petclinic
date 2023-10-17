@@ -4,16 +4,14 @@ Projekts paredzēts FITA apmācību nodevumam
 ## Github projekta izveidošanā
 
 Uzdevuma ietvaros izveidots: 
-- [ ] repozitorijs: https://github.com/jkuprina123/petclinic
-- [ ] pievienoti 3 lietotāji
+- [X] repozitorijs: https://github.com/jkuprina123/petclinic
+- [X] pievienoti 3 lietotāji
 
 # Projekta uzdevumi:
 ## _Infrastrukturas_ izveidošana
 Uzdevuma ietvaros izveidots:
-- [ ] AWS servera instance: i-04c72b8e5e204eb10 (For-Test-From-Terraform)
-- [ ] AMI name ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230516
-- [ ] Izmantojot **https://app.diagrams.net/** aprakstīt infrastruktūru. Bildes izvietot projekta Wiki.
-- [ ] ![book!](https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg?w=2000)
+- [x] AWS servera instance: i-04c72b8e5e204eb10 (For-Test-From-Terraform)
+- [X] ![Done file](https://github.com/jkuprina123/petclinic/wiki/DONE)
 
 ## _Docker_ uzstādīšana
 Uzdevuma ietvaros izveidots:
