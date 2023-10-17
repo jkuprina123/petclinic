@@ -28,16 +28,16 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
-        #  HOST_NAME : ${{ vars.DNS_ADDR }}
-          HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+       #   HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
          # HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
           USER_NAME : ${{ vars.USER_NAME}}
         run: |
            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
-           for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done \      
-           && curl -fsSL https://get.docker.com -o get-docker.sh \
-           && sudo sh ./get-docker.sh --dry-run \
+           for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done &      
+           && curl -fsSL https://get.docker.com -o get-docker.sh &
+           && sudo sh ./get-docker.sh --dry-run &
            && docker -v"
           
               
@@ -47,8 +47,8 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
-        #  HOST_NAME : ${{ vars.DNS_ADDR }}
-          HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+         # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
          # HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
           USER_NAME : ${{ vars.USER_NAME}}
         run: |
@@ -62,8 +62,8 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
-        #  HOST_NAME : ${{ vars.DNS_ADDR }}
-          HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+         # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
          # HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
           USER_NAME : ${{ vars.USER_NAME}}
         run: |
@@ -88,7 +88,7 @@ jobs:
            env :
                #HOST_NAME : ${{ vars.DNS_ADDR }}
                #  HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
-              HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
+             HOST_NAME : ${{ vars.DNS_ADDR }}
            uses: lakuapik/gh-actions-http-status@v1
            with:
             sites: '["http://${HOST_NAME}", "https://${HOST_NAME}"]'
@@ -100,7 +100,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
      
-          HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
           USER_NAME : ${{ vars.USER_NAME}}
     steps:
     - name: Checkout code
@@ -119,7 +119,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-west-2'
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
           USER_NAME : ${{ vars.USER_NAME}}
 
       run: |
