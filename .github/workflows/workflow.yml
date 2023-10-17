@@ -91,7 +91,7 @@ jobs:
              HOST_NAME : ${{ vars.DNS_ADDR }}
            uses: lakuapik/gh-actions-http-status@v1
            with:
-            sites: '["http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com", "https://ec2-34-219-74-168.us-west-2.compute.amazonaws.com"]'
+            sites: '["https://ec2-34-219-74-168.us-west-2.compute.amazonaws.com", "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com"]'
             expected: '[301, 200]'
 
   Copy_file:         
