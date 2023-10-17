@@ -87,7 +87,7 @@ jobs:
          - name: Check http status code of production site
            env :
                #HOST_NAME : ${{ vars.DNS_ADDR }}
-               #  HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+               # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
              HOST_NAME : ${{ vars.DNS_ADDR }}
            uses: lakuapik/gh-actions-http-status@v1
            with:
