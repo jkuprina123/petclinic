@@ -136,15 +136,16 @@ jobs:
   Petclinic_deploy:         
    runs-on: ubuntu-latest 
    steps:
-
-   - name: Deploy to Staging server
-     uses: easingthemes/ssh-deploy@main
+   - name: Copy single file to remote
+     uses: garygrossgarten/github-action-scp@release
      with:
-      SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-      SOURCE: "images/"
-      REMOTE_HOST: ${{ vars.DNS_ADDR }}
-      REMOTE_USER: ${{ vars.USER_NAME}}
-   #   TARGET: ${{ secrets.REMOTE_TARGET }}
+          local: README.md
+          remote: /home/ubuntu/README.md
+          host: ${{ vars.DNS_ADDR }}
+          username: ${{ vars.USER_NAME}}
+          privateKey : ${{ secrets.AWS_PRIVATE_KEY  }}
+          
+   
   
    - name: Deploy Docker
      env:
