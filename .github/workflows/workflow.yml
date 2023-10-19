@@ -136,14 +136,17 @@ jobs:
   Petclinic_deploy:         
    runs-on: ubuntu-latest 
    steps:
-   - name: Copy single file to remote
-     uses: garygrossgarten/github-action-scp@release
-     with:
-          local: README.md
-          remote: /home/ubuntu/README.md
-          host: ${{ vars.DNS_ADDR }}
-          username: ${{ vars.USER_NAME}}
-          privateKey : ${{ secrets.AWS_PRIVATE_KEY  }}
+   - name: Checkout code
+     uses: actions/checkout@v4
+
+   - name: Copy file to EC2
+     env:
+        SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+        SSH_HOST:  ${{ vars.DNS_ADDR }}
+     run: |
+        echo "$SSH_PRIVATE_KEY" > private_key
+        chmod 600 private_key
+        scp -i private_key $GITHUB_WORKSPACE/README.md ubuntu@$SSH_HOST:/home/ubuntu/
           
    
   
