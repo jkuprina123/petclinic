@@ -100,7 +100,7 @@ jobs:
            sudo apt-get update&
            sudo apt-get install -y awscli"
 
-    - name: Copy to S3 docker image in archive
+    - name: Create AWS credentials and gzip image
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -113,13 +113,26 @@ jobs:
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} " 
            sudo rm -f /root/.aws/credentials&
-           sudo docker save petclinic22:1.0.0 | gzip > myimage_latest.tar.gz&
-           sudo aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID&
-           sudo aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY&
-           sudo aws configure set default.region $AWS_DEFAULT_REGION&
-           sudo aws s3 cp hello_world.md s3://latest-test-our-fita --region us-west-2"
-          
+           sudo docker save petclinic22:1.0.0 | gzip > myimage_latest.tar.gz"
+    - name: Delay for 30 seconds (gzip)
+      run: sleep 30           
+    - name: Copy to S3 docker image in archive
+      env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-west-2'
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+          USER_NAME : ${{ vars.USER_NAME}}
 
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} " 
+           sudo aws s3 cp myimage_latest.tar.gz s3://latest-test-our-fita --region us-west-2"
+         #  sudo aws s3 cp hello_world.md s3://latest-test-our-fita --region us-west-2"
+          #sudo aws s3 cp myimage_latest.tar.gz s3://latest-test-our-fita --region us-west-2"
+    - name: Delay for 180 seconds (gzip)
+      run: sleep 180        
        
            
   Petclinic_deploy:         
