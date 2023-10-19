@@ -176,4 +176,4 @@ jobs:
      uses: lakuapik/gh-actions-http-status@v1
      with:
             sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080"]'
-            expected: '[200]'
+            expected: '[200] '
