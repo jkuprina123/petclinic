@@ -15,6 +15,7 @@ jobs:
       - name: Create S3 (aws s3 mb s3://latest-test-our-fita)
         run: |
           aws s3 ls s3://latest-test-our-fita
+          echo $GITHUB_WORKSPACE
 
           
           
