@@ -170,8 +170,11 @@ jobs:
             
             docker pull vasiliskovs/petclinic:5.3.22&
             docker run -p 9090:8080 -d vasiliskovs/petclinic:5.3.22  &
-            docker ps"         
+            docker ps"      
             
+   - name: Delay for 60 seconds
+     run: sleep 60     
+     
    - name: Check http status code of productions 2x sites(containers)
      env :
                #HOST_NAME : ${{ vars.DNS_ADDR }}
