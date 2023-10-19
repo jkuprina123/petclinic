@@ -146,6 +146,8 @@ jobs:
      run: |
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
+        cd $GITHUB_WORKSPACE
+        ls
         scp -i private_key $GITHUB_WORKSPACE/README.md ubuntu@$SSH_HOST:/home/ubuntu/
           
    
