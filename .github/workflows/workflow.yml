@@ -141,14 +141,15 @@ jobs:
 
    - name: Copy file to EC2
      env:
-        SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-        SSH_HOST:  ${{ vars.DNS_ADDR }}
+         PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+         HOST_NAME : ${{ vars.DNS_ADDR }}
+         USER_NAME : ${{ vars.USER_NAME}}
      run: |
-        echo "$SSH_PRIVATE_KEY" > private_key
-        chmod 600 private_key
+       echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+       ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME}
         cd $GITHUB_WORKSPACE
         ls
-        scp -i private_key $GITHUB_WORKSPACE/README.md ubuntu@$SSH_HOST:/home/ubuntu/
+        scp -i private_key $GITHUB_WORKSPACE/README.md ubuntu@$HOST_NAME:/home/ubuntu/
           
    
   
