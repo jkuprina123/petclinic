@@ -142,7 +142,7 @@ jobs:
       username: ${{ vars.USER_NAME}}
     #  port: ${{ secrets.PORT }}
       key: ${{ secrets.AWS_PRIVATE_KEY  }}
-      source: "Dockerfile, README.md"
+      source: "/Dockerfile, /README.md, images/*"
       target: "/home/ubuntu/custom_pet/"
    - name: Deploy Docker
      env:
