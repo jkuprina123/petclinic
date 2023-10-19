@@ -57,25 +57,11 @@ jobs:
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
                 
             sudo apt-get update&
-            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"           
-
-      - name: Deploy in EC2 (Install petclinic from hub)
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-                 
-          HOST_NAME : ${{ vars.DNS_ADDR }}
-         # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
-         # HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
-          USER_NAME : ${{ vars.USER_NAME}}
-        run: |
-           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
-               
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin&
             docker -v&
-            docker ps&
-            docker pull vasiliskovs/petclinic:5.3.22&
-            docker run -p 80:8080 -d vasiliskovs/petclinic:5.3.22  &
-            docker ps"
+            docker ps&"           
+
+     
 
    
             
@@ -162,12 +148,30 @@ jobs:
 
      run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "        
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} " 
+           docker stop $(docker ps -a -q)&
            docker build -t petclinic22:1.0.0 . &
            docker pull springcommunity/spring-framework-petclinic&
            docker run -p 8080:8080 -d petclinic22:1.0.0&
            docker run -p 80:8080 -d springcommunity/spring-framework-petclinic" 
            
+   - name: Deploy in EC2 (Install petclinic from hub)
+     env:
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+                 
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+         # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+         # HOST_NAME : ec2-54-185-19-93.us-west-2.compute.amazonaws.com 
+          USER_NAME : ${{ vars.USER_NAME}}
+     run: |
+           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
+               
+            
+            docker pull vasiliskovs/petclinic:5.3.22&
+            docker run -p 9090:8080 -d vasiliskovs/petclinic:5.3.22  &
+            docker ps"         
+            
    - name: Check http status code of productions 2x sites(containers)
      env :
                #HOST_NAME : ${{ vars.DNS_ADDR }}
@@ -175,5 +179,5 @@ jobs:
              HOST_NAME : ${{ vars.DNS_ADDR }}
      uses: lakuapik/gh-actions-http-status@v1
      with:
-            sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080"]'
+            sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:9090"]'
             expected: '[200] '
