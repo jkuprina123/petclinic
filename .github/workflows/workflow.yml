@@ -1,4 +1,4 @@
-name: "Development Builda"
+name: "Development Build"
 on: push
  
 jobs:
