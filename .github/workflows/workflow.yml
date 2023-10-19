@@ -139,7 +139,7 @@ jobs:
           
    
   
-   - name: Deploy Docker and run 2 containers
+   - name: Deploy Docker
      env:
           
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -151,7 +151,20 @@ jobs:
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} " 
            sudo bash ./stop_all_containers.sh& 
            docker build -t petclinic22:1.0.0 . &
-           docker pull springcommunity/spring-framework-petclinic&
+           docker pull springcommunity/spring-framework-petclinic" 
+   - name: Delay for 60 seconds
+     run: sleep 60        
+     
+   - name: Run 2 containers
+     env:
+          
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+          HOST_NAME : ${{ vars.DNS_ADDR }}
+          USER_NAME : ${{ vars.USER_NAME}}
+
+     run: |
+           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} " 
            docker run -p 8080:8080 -d petclinic22:1.0.0&
            docker run -p 80:8080 -d springcommunity/spring-framework-petclinic" 
            
