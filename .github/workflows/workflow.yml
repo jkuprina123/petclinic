@@ -3,7 +3,7 @@ on: push
  
 jobs:
 
-  S3:
+  S3_and_Docker:
     name: Deploy
    
     runs-on: ubuntu-latest
@@ -15,7 +15,7 @@ jobs:
       - name: Create S3 (aws s3 mb s3://latest-test-our-fita)
         run: |
           aws s3 ls s3://latest-test-our-fita
-          echo $GITHUB_WORKSPACE
+         
 
           
           
@@ -25,7 +25,7 @@ jobs:
           AWS_DEFAULT_REGION: 'us-west-2'
       
  
-      - name: Deploy in EC2 (Install Docker)
+      - name: Install Docker in EC2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
@@ -37,14 +37,14 @@ jobs:
            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "
            for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done &      
-           curl -fsSL https://get.docker.com -o get-docker.sh &
+           sudo curl -fsSL https://get.docker.com -o get-docker.sh &
            sudo sh ./get-docker.sh --dry-run &
            docker -v"
           
               
    
            
-      - name: Deploy in EC2 (Install Docker)2
+      - name: Install Docker in EC2 part 2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
                  
@@ -93,7 +93,7 @@ jobs:
            uses: lakuapik/gh-actions-http-status@v1
            with:
             sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com"]'
-            expected: '[ 200]'
+            expected: '[200]'
 
   Copy_file:         
     runs-on: ubuntu-latest
@@ -114,7 +114,7 @@ jobs:
            sudo apt-get update&
            sudo apt-get install -y awscli"
 
-    - name: Copy to S3
+    - name: Copy to S3 docker image in archive
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -139,7 +139,7 @@ jobs:
    - name: Checkout code
      uses: actions/checkout@v4
 
-   - name: Copy file to EC2
+   - name: Copy Dockerfile file from Github to EC2
      env:
          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
          HOST_NAME : ${{ vars.DNS_ADDR }}
@@ -149,11 +149,11 @@ jobs:
        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME}
         cd $GITHUB_WORKSPACE
         ls
-        scp -i private_key $GITHUB_WORKSPACE/README.md ubuntu@$HOST_NAME:/home/ubuntu/
+        scp -i private_key $GITHUB_WORKSPACE/Dockerfile ubuntu@$HOST_NAME:/home/ubuntu/
           
    
   
-   - name: Deploy Docker
+   - name: Deploy Docker and run 2 containers
      env:
           
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -163,4 +163,17 @@ jobs:
      run: |
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} "        
-           ls"    
+           docker build -t petclinic22:1.0.0 . &
+           docker pull springcommunity/spring-framework-petclinic&
+           docker run -p 8080:8080 -d petclinic22:1.0.0&
+           docker run -p 80:8080 -d springcommunity/spring-framework-petclinic" 
+           
+   - name: Check http status code of productions 2x sites(containers)
+     env :
+               #HOST_NAME : ${{ vars.DNS_ADDR }}
+               # HOST_NAME : ec2-34-219-74-168.us-west-2.compute.amazonaws.com 
+             HOST_NAME : ${{ vars.DNS_ADDR }}
+     uses: lakuapik/gh-actions-http-status@v1
+     with:
+            sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080"]'
+            expected: '[200]'
