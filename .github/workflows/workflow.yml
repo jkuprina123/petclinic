@@ -134,8 +134,8 @@ jobs:
            sudo aws s3 cp myimage_latest.tar.gz s3://latest-test-our-fita --region us-west-2"
          #  sudo aws s3 cp hello_world.md s3://latest-test-our-fita --region us-west-2"
           #sudo aws s3 cp myimage_latest.tar.gz s3://latest-test-our-fita --region us-west-2"
-    - name: Delay for 180 seconds (gzip)
-      run: sleep 180        
+  #  - name: Delay for 180 seconds (gzip)
+  #   run: sleep 180        
        
            
   Petclinic_deploy:         
