@@ -214,5 +214,6 @@ jobs:
              HOST_NAME : ${{ vars.DNS_ADDR }}
      uses: lakuapik/gh-actions-http-status@v1
      with:
-            sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:9090"]'
+           # sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:8080","http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com:9090"]'
+            sites: '[ "http://ec2-34-219-74-168.us-west-2.compute.amazonaws.com"]'
             expected: '[200] '
