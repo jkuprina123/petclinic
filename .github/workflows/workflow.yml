@@ -140,7 +140,7 @@ jobs:
      uses: easingthemes/ssh-deploy@main
      with:
       SSH_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-      SOURCE: "README.md"
+      SOURCE: "images/"
       REMOTE_HOST: ${{ vars.DNS_ADDR }}
       REMOTE_USER: ${{ vars.USER_NAME}}
    #   TARGET: ${{ secrets.REMOTE_TARGET }}
